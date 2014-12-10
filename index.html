@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="Class">
+<head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>班级管理 - 洋葱数学</title>
+    <link href="//cdn.bootcss.com" rel="dns-prefetch" />
+    <link href="//yangcong345.qiniudn.com" rel="dns-prefetch" />
+    <link href="//mothership.qiniudn.com" rel="dns-prefetch" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webapp/common/style/style.min.css" rel="stylesheet" type="text/css">
+    <link href="/webapp/common/style/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="css/myclass.css" rel="stylesheet" type="text/css">
+    <link href="css/loader.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <loading-animate></loading-animate>
+    <div ng-view></div>
+    <!-- Load Third Libs -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.16/angular.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.16/angular-route.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.6.0/underscore-min.js"></script>
+    <script src="http://cdn.bootcss.com/moment.js/2.7.0/moment-with-langs.min.js"></script>
+    <script src="http://cdn.bootcss.com/zeroclipboard/2.1.6/ZeroClipboard.min.js"></script>
+    <!--Load common module-->
+    <script type="text/javascript" src="/webapp/common/resources/lib/ng-clip/ng-clip.js"></script>
+    <script type="text/javascript" src="/webapp/common/mixpanel/js/mixpanel.js"></script>
+    <script type="text/javascript" src="/webapp/common/compatibility/js/check.js"></script>
+    <script type="text/javascript" src="/webapp/common/softRegist/softRegist.js"></script>
+    <script type="text/javascript" src="/webapp/common/feedback/feedback.js"></script>
+    <script type="text/javascript" src="/webapp/common/loadingAnimate/loadingAnimate.js"></script>
+    <script type="text/javascript" src="/webapp/common/navbar/navbar.js"></script>
+    <script type="text/javascript" src="/webapp/common/formValidation/formValidation.js"></script>
+    <!--Load App.-->
+    <script type="text/javascript" src="app.js"></script>
+    <!--Load services.-->
+    <script type="text/javascript" src="services/service.js"></script>
+    <!--Load controllers.-->
+    <script type="text/javascript" src="controller/controllers.js"></script>
+    <!-- Load directives -->
+    <script type="text/javascript" src="directives/js/directives.js"></script>
+</body>
+</html>

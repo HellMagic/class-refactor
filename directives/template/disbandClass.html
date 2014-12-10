@@ -1,0 +1,24 @@
+<div class="modal fade" id="disbandClassDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class='modal-dialog' style="color: black">
+        <div class='modal-content'>
+            <div class="modal-header">
+                <button type="button" class="close fui-cross" data-dismiss="modal" aria-hidden="true"
+                        ng-click="hideModal(false)"></button>
+                <h4 class="modal-title">解散班级</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定解散班级：{{currentClass.name}}?
+                    <br>解散班级，该班级所有相关内容将会被删除。</p>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" autofocus placeholder="输入洋葱数学登录密码" ng-model="temp.disbandClassPassword">
+                    <span class="error-msg" ng-show="temp.inputErr==='wrong'">密码错误，请重新输入</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-defautl" data-dismiss="modal">取消</button>
+                <button class="btn btn-success" ng-click="disbandClass()" ng-disabled="!temp.disbandClassPassword">解散</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{
+    "id": "class-refactor",
+    "version_code": 1,
+    "name": "教师后台-班级管理",
+    "type": "web_app",
+    "launchable": 1,
+    "package_name": "org.sunlib.class",
+    "url": "/app/102",
+    "home": "/index.html",
+    "description": "教师后台的班级管理模块。",
+
+    "local_folder": "/app/web"
+}

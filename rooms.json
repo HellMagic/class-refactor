@@ -1,0 +1,49 @@
+[
+  {
+    "students": [
+      {"name": "一班一号", "username":"ghxz1", "lastLoginTime": "2小时"},
+      {"name": "一班二号", "username":"ghxz2", "lastLoginTime": "1小时"},
+      {"name": "一班三号", "username":"ghxz3", "lastLoginTime": "3小时"},
+      {"name": "一班四号", "username":"ghxz4", "lastLoginTime": "4小时"},
+      {"name": "一班五号", "username":"ghxz5", "lastLoginTime": "2小时"},
+      {"name": "一班六号", "username":"ghxz6", "lastLoginTime": "1小时"},
+      {"name": "一班七号", "username":"ghxz7", "lastLoginTime": "2小时"}
+    ],
+    "name": "一班",
+    "classNumber": "QWER"
+  },
+  {
+    "students": [
+      {"name": "二班一号", "username":"ghxz1", "lastLoginTime": "2天"},
+      {"name": "二班二号", "username":"ghxz2", "lastLoginTime": "5天"},
+      {"name": "二班三号", "username":"ghxz3", "lastLoginTime": "6天"},
+      {"name": "二班四号", "username":"ghxz4", "lastLoginTime": "3天"},
+      {"name": "二班五号", "username":"ghxz5", "lastLoginTime": "2天"},
+      {"name": "二班六号", "username":"ghxz6"},
+      {"name": "二班七号", "username":"ghxz8"},
+      {"name": "二班八号", "username":"ghxz9"},
+      {"name": "二班九号", "username":"ghxz0"}
+    ],
+    "newStudents": [
+      {"name": "二班七号", "username":"ghxz8"},
+      {"name": "二班八号", "username":"ghxz9"},
+      {"name": "二班九号", "username":"ghxz0"}
+    ],
+    "name": "二班",
+    "classNumber": "ASDF"
+  },
+  {
+    "students": [
+      {"name": "三班一号", "username":"ghxz1", "lastLoginTime": "1天"},
+      {"name": "三班二号", "username":"ghxz2"},
+      {"name": "三班三号", "username":"ghxz3", "lastLoginTime": "4天"},
+      {"name": "三班四号", "username":"ghxz4"},
+      {"name": "三班五号", "username":"ghxz5", "lastLoginTime": "2小时"},
+      {"name": "三班六号", "username":"ghxz6"},
+      {"name": "三班七号", "username":"ghxz7", "lastLoginTime": "1小时"},
+      {"name": "三班八号", "username":"ghxz8"}
+    ],
+    "name": "三班",
+    "classNumber": "ZXCV"
+  }
+]

@@ -1,0 +1,46 @@
+<div class="modal fade" id="addStudentDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class='modal-dialog' style="color: black">
+        <div class='modal-content'>
+            <div class="modal-header">
+                <h4 class="modal-title">添加学生</h4>
+            </div>
+            <div class="modal-body">
+                <form name="addStudentForm" novalidation ng-submit="joinStudent(addStudentForm)">
+                    <div class="form-group">
+                        <label for="username">用户名（必填）</label>
+                        <input type="text" name="username" class="form-control" ng-model="newStudent.username"
+                               placeholder="6~18个字符，字母、数字、下划线，需字母开头"
+                               ng-minlength="6" ng-maxlength="18"
+                               gh-username
+                               gh-exist-in-room="currentClass"
+                               autocapitalize="off" autocorrect="off"/>
+                        <span class="error-msg" ng-show="addStudentForm.username.$error.required && submitted">
+                            请输入用户名
+                        </span>
+                        <span class="error-msg" ng-show="addStudentForm.username.$error.username && submitted">
+                            请输入字母、数字、下划线，需字母开头
+                        </span>
+                        <span class="error-msg" ng-show="addStudentForm.username.$error.minlength && submitted">
+                            长度应为6~18个字符
+                        </span>
+                        <span class="error-msg" ng-show="addStudentForm.username.$error.maxlength && submitted">
+                            长度应为6~18个字符
+                        </span>
+                        <span class="error-msg" ng-show="addStudentForm.username.$error.exist && submitted">
+                            此学生已经存在当前班级中
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">姓名（选填）</label>
+                        <input type="text" name="name" class="form-control" ng-model="newStudent.name" placehoder="姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>  &nbsp
+                        <strong>默认同用户名密码</strong>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block" ng-disabled="!newStudent.username">添加学生</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

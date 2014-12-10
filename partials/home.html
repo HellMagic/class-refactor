@@ -1,0 +1,103 @@
+<navbar active="班级管理" me="homeC.me" score="" class="animated"></navbar>
+<div soft-regist flag="tip_app" content="获得洋葱账号, 就可以使用班级管理功能啦~" me="homeC.me" position="班级管理"></div>
+<div class="container page-box-white animated" not-have-school>
+    <div class="col-sm-3">
+        <div class="page-box-whit">
+            <a href ng-click="broadcastEvent('createClass')" class="pull-right">
+                <span class="fui-plus-inverted"></span>
+                创建班级
+            </a>
+            <h4>我的班级</h4>
+            <ul id="classesList" class="nav nav-list mtl class-list">
+                <li ng-repeat="room in homeC.rooms"
+                    ng-click="selectOneClass(room)"
+                    ng-class="{active: room.classNumber === homeC.selectedClass.classNumber}">
+                    <a href="">
+                        {{room.name}}
+                        <span class="badge pull-right">{{room.students.length}}</span>
+                        <span class="navbar-unread" ng-show="room.newStudents.length && room.newStudents.length!==0"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <create-class-or-student-dialog room="homeC.selectedClass"></create-class-or-student-dialog>
+    </div>
+    <div class="col-sm-9" ng-if="homeC.selectedClass">
+        <div class="class-header">
+            <h3>
+                <span ng-if="!homeC.isEditClassName">{{homeC.selectedClass.name}}</span>
+                <input style="color:black" type="text" ng-if="homeC.isEditClassName"
+                       ng-model="homeC.selectedClass.name" edit-interactive>
+            </h3>
+            <p style="margin:0px">
+                <span>班级编号</span>
+                <span style="cursor:help" class="badge" data-toggle="tooltip" data-placement="bottom"
+                      title="学生如何加入班级：登录后进入【个人中心】-【我的班级】，输入班级编号即可。"
+                      hover-show>?</span>
+                :&nbsp;<span>{{homeC.selectedClass.classNumber}}</span>
+                    <a id="linkCopy" href class="text-inverse opacity50" clip-copy="copyClassNumber()"
+                       ng-show="!homeC.showCopySuccess">
+                        <u>复制</u>
+                    </a>
+                <span id="linkCopied" class="text-muted" copy-interactive ng-show="homeC.showCopySuccess">
+                    <span class="fui-check"></span>
+                    已复制
+                </span>
+            </p>
+            <a href class="btn btn-danger btn-xs pull-right" style="margin:0 5px" ng-click="broadcastEvent('disbandClass')">解散班级</a>
+            <a href ng-if="homeC.selectedClass.students.length<100" class="btn btn-danger btn-xs pull-right"
+               style="margin:0 5px"
+               ng-click="broadcastEvent('addStudent')">添加学生</a>
+            <a href ng-if="homeC.selectedClass.students.length>=100" class="btn btn-danger btn-xs pull-right"
+               style="margin:0 5px"
+               data-toggle="tooltip" data-placement="top"
+               title="班级人数不能超 过100人" hover-show>添加学生</a>
+            <a href class="btn btn-danger btn-xs pull-right" style="margin:0 5px" ng-click="editClassName()">修改班名</a>
+
+            <p>
+                学生人数：{{homeC.selectedClass.students.length}} &nbsp; （ 其中{{homeC.not_lonin_numbers}}人尚未登录过 ）
+            </p>
+
+            <add-student-dialog room="homeC.selectedClass"></add-student-dialog>
+            <disband-class-dialog room="homeC.selectedClass"></disband-class-dialog>
+        </div>
+
+        <table class="table table-hover mtl" ng-if="homeC.selectedClass.students && homeC.selectedClass.students.length > 0">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>用户名</th>
+                <th>上次登陆</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="student in homeC.selectedClass.students">
+                <td ng-if="$index !== homeC.selectedStudentIndex || !homeC.isEditStudentName" new-student="student">
+                    {{student.name}}
+                </td>
+                <td ng-if="homeC.isEditStudentName && $index === homeC.selectedStudentIndex">
+                    <input type="text" ng-model="student.name" edit-interactive>
+                </td>
+                <td>{{student.username}}</td>
+                <td>{{student.lastLoginTime}}</td>
+                <td class="text-right" ng-click="selectOneStudent($index)">
+                    <a href class="text-danger pull-right remove-stu" ng-click="broadcastEvent('removeStudent', $index)">踢出班级</a>
+                    <a href class="text-danger pull-right remove-stu" ng-click="broadcastEvent('resetPassword', $index)">重置密码</a>
+                    <a href class="text-danger pull-right remove-stu" ng-click="editStudentName($index)">修改姓名</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div ng-if="!homeC.selectedClass.students || homeC.selectedClass.students.length<=0">
+            <h3>还没有任何学生，
+                <button class="btn btn-large btn-primary" type="button"
+                        ng-click="broadcastEvent('createStudents')">一键生成学生帐号
+                </button>
+            </h3>
+        </div>
+        <reset-password-dialog student="homeC.selectedStudent"></reset-password-dialog>
+        <remove-student-dialog student="homeC.selectedStudent" room="homeC.selectedClass"></remove-student-dialog>
+    </div>
+</div>
+<class-exceeding-dialog></class-exceeding-dialog>

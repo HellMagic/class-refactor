@@ -1,0 +1,172 @@
+<div class="modal fade" id="ModelOfCreate" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:scroll">
+    <div class='modal-dialog' style="left: auto" ng-switch="temp.createProcess">
+        <div class="modal-content" ng-switch-when="createClass" name="创建班级">
+            <div class="modal-header">
+                <button type="button" class="close fui-cross" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">创建班级</h4>
+            </div>
+            <div class='modal-body'>
+                <p>创建班级后，您可以随时查看班级学习进展情况，并对每个学生进行详细的学习进度跟踪。</p>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input class="form-control" placeholder="请输入班级名称" ng-model="temp.newClassName">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-disabled="!temp.newClassName" ng-click="createClass()">创建</button>
+                        </div>
+                    </div>
+                    <span ng-show="temp.createClassTip==='noName'" class="error-msg">请填写新班级名称</span>
+                    <span ng-show="temp.createClassTip==='formatWrong'" class="error-msg">班级名称不可以超过15个字符，请修改名称</span>
+                    <span ng-show="temp.createClassTip==='alreadyHave'" class="error-msg">您已经用此名称创建过班级，请修改名称</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" ng-switch-when="createdClass" name="创建班级成功">
+            <div class='modal-body' name="创建流程说明">
+                <h4>
+                    <span class="text-success fui-check"></span>
+                    新建成功！您的班级编号为：
+                    <span class="text-info">{{temp.newClassNumber}}</span>
+                </h4>
+                <hr>
+                <h4 class="text-center">
+                    <span class="text-success fui-check">如何在班级里添加学生</span>
+                </h4>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>方法一：主动生成账号</h4>
+                        <dl>
+                            <dt>适合：</dt>
+                            <dd>学生还没有洋葱数学账号，一键生成</dd>
+                        </dl>
+                        <dl>
+                            <button class="btn btn-block btn-info" ng-click="toCreateStudentsAccount()">
+                                一键生成学生账号
+                            </button>
+                        </dl>
+                    </div>
+                    <div class="col-md-6" style="border-left: dashed 1px deepskyblue">
+                        <h4>方法二：让学生来加入</h4>
+                        <dl>
+                            <dt>第一步</dt>
+                            <dd>将班级编号公布给学生，比如在课堂上公布或发送班级QQ群。</dd>
+                            <dt>第二步</dt>
+                            <dd>未注册的学生，使用班级编号作为邀请码注册，则自动被加入该班级。</dd>
+                            <dd>已注册的学生，登录后进入【个人中心】-【我的班级】，输入班级编号即可加入。</dd>
+                            <dt>第三步</dt>
+                            <dd>坐等学生加入～</dd>
+                        </dl>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">我知道了</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" ng-switch-when="createStudents" name="批量创建学生">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    生成学生账号
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </h4>
+            </div>
+            <div class="modal-body" name="创建学生账号">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs nav-append-content nav-justified">
+                            <li style="cursor: pointer" ng-class="{'active': temp.createStudentsWay === 'auto'}">
+                                <a ng-click="selectCreateStudentsWay('auto')">自动生成学生账号</a>
+                            </li>
+                            <li style="cursor: pointer" ng-class="{'active': temp.createStudentsWay === 'self'}">
+                                <a ng-click="selectCreateStudentsWay('self')">手动输入学生账号</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-if="temp.createStudentsWay === 'auto'" class="col-md-12">
+                        <br>
+                        <input type="text" class="form-control" placeholder="请输入班级人数" ng-model="temp.students_count">
+                        <span style="color: red" ng-show="temp.inputErr === 'NaN'">请输入一个正确的数字</span>
+                        <span style="color: red" ng-show="temp.inputErr === 'exceed'">班级人数不能超过100人</span>
+                        <br>
+                        <button class="btn btn-block btn-info" ng-click="generateStudents()" ng-disabled="!temp.students_count">
+                            <span ng-if="!temp.createStudentsProcessing">生成</span>
+                            <span ng-if="temp.createStudentsProcessing">
+                                <img width="19px" src="/webapp/common/resources/img/loading.gif">
+                                &nbsp;生成中
+                            </span>
+                        </button>
+                    </div>
+                    <div ng-if="temp.createStudentsWay === 'self'" class="col-md-12">
+                        <br>
+                        <dl>
+                            <li>请您把学生姓名逐行输入到下方的文本框中（也可以直接从电子文档中复制粘贴）</li>
+                            <br>
+                            <li>每行请只输入一个名字</li>
+                            <br>
+                            <li>我们会按照输入顺序自动生成学生序号（推荐您按照学号顺序输入）</li>
+                            <br>
+                        </dl>
+                        <dl>
+                            <textarea class="form-control" rows="5" placeholder="学生姓名1 学生姓名2" ng-model="temp.names"></textarea>
+                            <br>
+                            <span style="color: red" ng-show="temp.inputErr==='exceed'">班级人数不能超过100人</span>
+                            <button class="btn btn-block btn-info" ng-click="generateStudents()" ng-disabled="!temp.names">
+                                <span ng-if="!temp.createProcessing">生成</span>
+                                <span ng-if="temp.createProcessing">
+                                    <img width="19px" src="/webapp/common/resources/img/loading.gif">
+                                    &nbsp;生成中
+                                </span>
+                            </button>
+                        </dl>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" ng-switch-when="createdStudents" name="创建学生完成">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    生成学生账号成功
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </h4>
+            </div>
+            <div class="modal-body" name="账号创建完成">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            已自动为您创建好学生账号，“班级编号+学号”，默认初始密码同用户名。请让您的学生用此账号登录并完善信息。您可以随时在“学情跟踪”中查看学生的学习情况。
+                        </h4>
+                        <br>
+                        <h4>班级编号：{{temp.newClassNumber}}</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>用户名</th>
+                                <th>密码</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="student in temp.students">
+                                <td>{{student.name}}</td>
+                                <td>{{student.username}}</td>
+                                <td>默认同用户名</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">我知道了</button>
+            </div>
+        </div>
+    </div>
+</div>
